@@ -17,11 +17,10 @@ const RegisterPage = () => {
 
   try {
     const res = await axios.post(
-      'http://localhost:9095/api/auth/register',
-      { username, password, email, role },
-      { headers: { 'Content-Type': 'application/json' } }
-    );
-
+    `${API}/api/auth/register`,
+    { username, password, email, role },
+    { headers: { 'Content-Type': 'application/json' } }
+  );
     console.log("Registration success:", res.data);
     window.location.href = '/login';
   } catch (err) {

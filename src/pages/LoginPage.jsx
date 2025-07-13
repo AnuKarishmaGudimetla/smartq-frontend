@@ -19,21 +19,17 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-
     try {
-      const { data } = await axios.post(
-        'http://localhost:9095/api/auth/login',
-        { username, password }
-      );
-
+    const { data } = await axios.post(`${API}/api/auth/login`, {
+      username,
+      password,
+    });
       const raw = data.token || data;
       const token = raw.replace(/^Bearer\s/, '');
       const decoded = jwtDecode(token);
       const extractedUsername = decoded.sub;
       const role = decoded.role.replace('ROLE_', '');
-
       login(token, { username: extractedUsername, role });
-
       if (role === 'ADMIN') {
         navigate('/admin');
       } else {
@@ -47,7 +43,6 @@ const LoginPage = () => {
       );
     }
   };
-
   return (
     <div
       className="min-h-screen flex justify-center items-center relative"
@@ -99,5 +94,4 @@ const LoginPage = () => {
     </div>
   );
 };
-
 export default LoginPage; 
