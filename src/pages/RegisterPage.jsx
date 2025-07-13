@@ -9,7 +9,7 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('STUDENT');
   const [error, setError] = useState(null);
-
+const API = process.env.REACT_APP_API_BASE_URL;
   const handleRegister = async (e) => {
   e.preventDefault();
   setError(null);
