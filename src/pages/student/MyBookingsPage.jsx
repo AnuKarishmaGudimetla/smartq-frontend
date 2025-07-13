@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
-
+const API = process.env.REACT_APP_API_BASE_URL; 
 const MyBookingsPage = () => {
   const [bookings, setBookings] = useState([]);
   const { token } = useAuth();
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:9095/api/slots/my', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(`${API}/api/slots/my`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
       setBookings(response.data);
     } catch {
       alert('Failed to fetch bookings');
@@ -21,10 +21,10 @@ const MyBookingsPage = () => {
     if (!window.confirm('Cancel this booking?')) return;
     try {
       const response = await axios.put(
-        `http://localhost:9095/api/slots/cancel/${slotId}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+   `${API}/api/slots/cancel/${slotId}`,
+    {},
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
       alert(response.data.message);
       fetchBookings();
     } catch (error) {

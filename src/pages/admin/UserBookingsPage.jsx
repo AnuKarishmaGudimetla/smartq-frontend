@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import bgImage from '../../assets/offce.jpg';
-
+const API = process.env.REACT_APP_API_BASE_URL;
 const UserBookingsPage = () => {
   const { token, user } = useAuth();
   const [slots, setSlots] = useState([]);
@@ -12,8 +12,8 @@ const UserBookingsPage = () => {
   const fetchSlots = async () => {
     try {
       const res = await axios.get(
-        'http://localhost:9095/api/slots/admin/all',
-        { headers: { Authorization: `Bearer ${token}` } }
+        `${API}/api/slots/admin/all`,
+         { headers: { Authorization: `Bearer ${token}` } }
       );
       setSlots(res.data);
       setError(null);

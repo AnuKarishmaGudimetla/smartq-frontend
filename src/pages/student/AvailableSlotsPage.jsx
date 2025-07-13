@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 
+const API = process.env.REACT_APP_API_BASE_URL;
 const AvailableSlotsPage = () => {
   const { token } = useAuth();
   const [slots, setSlots] = useState([]);
@@ -18,7 +19,7 @@ const AvailableSlotsPage = () => {
   const fetchSlots = async (dateStr) => {
     try {
       const response = await axios.get(
-        `http://localhost:9095/api/slots/available/${dateStr}`,
+  `${API}/api/slots/available/${dateStr}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const availableSlots = response.data.filter((s) => s.status === 'AVAILABLE');
@@ -30,7 +31,6 @@ const AvailableSlotsPage = () => {
       setSlots([]);
     }
   };
-
   useEffect(() => {
     if (!selectedDate) return;
     fetchSlots(selectedDate);

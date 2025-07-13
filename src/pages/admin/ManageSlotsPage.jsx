@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import bgImage from '../../assets/offce.jpg'; // Adjust path as needed
-
+const API = process.env.REACT_APP_API_BASE_URL;
 const isPastDate = (inputDate) => {
   const selected = new Date(inputDate);
   const today = new Date();
@@ -38,10 +38,10 @@ const ManageSlotsPage = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:9095/api/slots/admin/create/${date}`,
-        {},
-        config
-      );
+  `${API}/api/slots/admin/create/${date}`,
+  {},
+  config
+);
       setSlots(res.data);
       setMessage({ type: 'success', text: 'Slots created successfully.' });
     } catch (err) {
@@ -59,9 +59,9 @@ const ManageSlotsPage = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:9095/api/slots/admin/delete/${date}`,
-        config
-      );
+    `${API}/api/slots/admin/delete/${date}`,
+    config
+    );
       setSlots([]);
       setMessage({
         type: 'success',
