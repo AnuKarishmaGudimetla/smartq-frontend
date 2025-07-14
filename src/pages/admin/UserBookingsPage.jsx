@@ -51,10 +51,10 @@ const UserBookingsPage = () => {
     if (!window.confirm('Confirm cancellation by admin?')) return;
     try {
       const res = await axios.put(
-        `http://localhost:9095/api/slots/cancel/${slotId}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      `${API}/api/slots/cancel/${slotId}`,  
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+  );
       alert(res.data.message);
       fetchSlots();
     } catch (err) {
